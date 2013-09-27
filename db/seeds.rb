@@ -40,5 +40,5 @@ end
 end
 
 140.times do
-  Response.create(choice_id: rand(1..80))
+  Response.create(choice_id: rand(1..80), question_id: rand(1..40))
 end
