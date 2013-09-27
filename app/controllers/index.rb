@@ -71,7 +71,14 @@ post "/survey/:id/:counter" do
     name = "q_#{counter}"
     survey.questions << Question.new(title: params["#{name}"])
     counter += 1
-  end
+    end
+    survey.questions.each do |q|
+      q.choices << Choice.new(possible_response: "Strongly Agree")
+      q.choices << Choice.new(possible_response: "Agree")
+      q.choices << Choice.new(possible_response: "Neutral")
+      q.choices << Choice.new(possible_response: "Disagree")
+      q.choices << Choice.new(possible_response: "Totally Disagree")
+    end
   redirect "/profile/#{user.id}"
 end
 

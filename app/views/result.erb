@@ -1,0 +1,18 @@
+<h1><%=@survey.name%></h1>
+
+<div>
+  <% @survey.questions.each do |q|%>
+  <%= q.title %> <br>
+
+
+    <% q.choices.each do |c| %>
+      <% n = 0 %>
+      <% q.responses.each do |r| %>
+        <% if r.choice.id == c.id %>
+          <% n += 1 %> 
+        <% end %>
+      <% end %>
+    <%= n %> people answer <%= c.possible_response %> <br>
+    <% end%>
+  <% end %>
+</div>
