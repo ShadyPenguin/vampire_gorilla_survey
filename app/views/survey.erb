@@ -1,0 +1,10 @@
+<h1><%= @survey.name %></h1>
+
+<form action="/survey/<%= @survey.id %>/<%= @number %>" method="POST">
+<% counter = 1 %>
+<% @number.times do %>
+  <label>Question <%= counter %>: <input type="text" name="q_<%= counter %>"></label><br>
+  <% counter += 1 %>
+<% end %>
+<input type="submit">
+</form>

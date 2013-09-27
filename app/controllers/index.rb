@@ -9,19 +9,28 @@ get '/sign_up' do
   erb :sign_up
 end
 
-get '/profile' do 
+get '/profile/:id' do 
   # create survey button & lists of surveys below
+  @user = User.find(params[:id])
+  erb :profile
 end
 
-get '/survey/:id' do
+get '/survey/:id/:question_number' do
+  @survey = Survey.find(params[:id])
+  @number = params[:question_number].to_i
+  erb :survey
   # result of each survey
 end 
 
 get '/create_survey' do 
-  # create survey 
+  # create survey
+
+  erb :create_survey 
 end 
 
-get '/survey/link' do
+get '/survey/:id' do
+  @survey = Survey.find(params[:id])
+  erb :survey_link
   # displays link to (just) created survey for survey taker to take survey
 end
 
@@ -29,24 +38,42 @@ end
 
 post '/log_in' do 
   user = User.authenticate(params[:email], params[:password])
-  if user.valid?
+  if user
     session[:user_id] = user.id
-    redirect '/profile'
+    redirect "/profile/#{user.id}"
   end 
   redirect '/'
 end 
 
 
 post '/sign_up' do
-  user = User.create(email: params[:email], password: params[:password])
-  session[:user_id] = user.id
-  redirect '/profile'
+  user = User.create(email: params[:email],username: params[:username], password: params[:password])
+  if user.valid?
+    session[:user_id] = user.id
+    redirect "/profile/#{user.id}"
+  else
+    redirect "/"
+  end
 end
 
 post '/create_survey' do
-  # create survey
+  new_survey = Survey.create(name: params[:name])
+  User.find(session[:user_id]).surveys << new_survey
+  number = params[:number]
+  redirect "/survey/#{new_survey.id}/#{number}"
 end
 
+post "/survey/:id/:counter" do
+  counter = 1
+  survey = Survey.find(params[:id])
+  user = survey.user
+  params[:counter].to_i.times do 
+    name = "q_#{counter}"
+    survey.questions << Question.new(title: params["#{name}"])
+    counter += 1
+  end
+  redirect "/profile/#{user.id}"
+end
 
 post '/take_survey/:survey_id' do 
   # take survey

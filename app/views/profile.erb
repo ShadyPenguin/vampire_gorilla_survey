@@ -1,0 +1,16 @@
+<h1>Welcome, <%= @user.username %>!</h1>
+
+<!-- <form action="/create_survey" method="POST">
+  <label>How many questions? <input type="text" required name="question_number"></label>
+  <input type="submit" required value="Create Survey">
+</form> -->
+
+<a href="/create_survey">Create A New Survey</a>
+
+<h2>Your Surveys</h2>
+<ul>
+<% @user.surveys.each do |survey| %>
+  <a href="/survey/<%= survey.id %>"><li><%= survey.name %></li></a>
+<% end %>
+</ul>
+
