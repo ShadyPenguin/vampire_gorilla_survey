@@ -1,0 +1,31 @@
+  <form action="/take_survey" method="POST">
+   <input type="radio" name="question1" value="choice1"> Strongly Agree <br>
+   <input type="radio" name="question1" value="choice2"> Agree <br> 
+    <!-- <input type="radio" name="<%=q.id%>" value="<%=c.id %>">
+    <%= c.possible_response %> <br>  -->
+  </form>
+
+  <h1><%=@survey.name%></h1>
+<div>Questions</div>
+
+<div>
+
+  <h2><% @survey.questions.each do |q|%></h2>
+  <%= q.title %> <br>
+  <form action="/take_survey" method="POST">
+   <input type="radio" name="question1" value="choice1"> <% <br>
+   <input type="radio" name="question1" value="choice2"> Agree <br> 
+   <input type="radio" name="question1" value="choice2"> Neutral <br> 
+   <input type="radio" name="question1" value="choice2"> Not Agree <br> 
+   <input type="radio" name="question1" value="choice2"> Strongly disagree <br>
+ </form>
+  <% end %>
+</div>
+
+ <% @survey.questions.each do |q|%>
+    <%= q.title %> <br>
+      <% q.choices.each do |c| %>
+        <%= c.possible_response %> <br>
+      <% end %>
+    <% end %>
+
