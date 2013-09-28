@@ -82,9 +82,9 @@ post "/survey/:id/:counter" do
   redirect "/profile/#{user.id}"
 end
 
-post '/take_survey/:survey_id' do 
+# post '/take_survey/:survey_id' do 
   # take survey
-end 
+# end 
 
 
 # post '/survey/:survey_id/create_question' do 
