@@ -2,9 +2,9 @@
 
 <div>
   <% @survey.questions.each do |q|%>
-  <%= q.title %> <br>
-
-
+  
+  <%= q.title %>
+  <ul>
     <% q.choices.each do |c| %>
       <% n = 0 %>
       <% q.responses.each do |r| %>
@@ -12,7 +12,10 @@
           <% n += 1 %> 
         <% end %>
       <% end %>
-    <%= n %> people answer <%= c.possible_response %> <br>
+    <li><%= n %> people answer <%= c.possible_response %></li>
     <% end%>
+  </ul>
   <% end %>
 </div>
+
+<a href="/profile/<%= @survey.user.id %>">Go Home</a>

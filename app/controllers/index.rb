@@ -24,7 +24,7 @@ end
 
 get '/create_survey' do 
   # create survey
-
+  @user = User.find(session[:user_id])
   erb :create_survey 
 end 
 
