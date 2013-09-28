@@ -52,7 +52,7 @@ post '/sign_up' do
     session[:user_id] = user.id
     redirect "/profile/#{user.id}"
   else
-    redirect "/"
+    redirect "/sign_up"
   end
 end
 
