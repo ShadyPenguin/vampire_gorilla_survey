@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>Radar Chart</title>
+    <script src="/js/Chart.js"></script>
+    <meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
+    <style>
+      canvas{
+      }
+    </style>
+  </head>
+  <body>
+    <%= @question.title %> <br>
+    <div id= "strongly_agree" data-value="<%=@strongly_agree%>"> </div> Strongly Agree<br>
+    <div id= "agree" data-value="<%=@agree%>"></div> Agree <br>
+    <div id= "neutral" data-value="<%=@neutral%>"> </div> Neutral <br>
+    <div id= "disagree" data-value="<%=@disagree%>"> </div> Disagree  <br>
+    <div id= "strongly_disagree" data-value="<%=@strongly_disagree%>"> </div> Strongly Disagree
+    <canvas id="canvas" height="450" width="450"></canvas>
+  <script>
+    $(document).ready(function(){
+      var strongly_agree = $('#strongly_agree').data('value')
+      var agree = $('#agree').data('value')
+      var neutral = $('#neutral').data('value')
+      var disagree = $('#disagree').data('value')
+      var strongly_disagree = $('#strongly_disagree').data('value')
+
+      console.log(strongly_agree);
+      console.log(agree);
+      console.log(neutral);
+      console.log(disagree);
+      console.log(strongly_disagree);
+
+    var pieData = [
+        {
+          value: strongly_agree,
+          color:"#F38630"
+        },
+        {
+          value : agree,
+          color : "#E0E4CC"
+        },
+        {
+          value : neutral,
+          color : "#69D2E7"
+        },
+        {
+          value : disagree,
+          color : "green"
+        },
+        {
+          value : strongly_disagree,
+          color : "grey"
+        }
+      ];
+
+  var myPie = new Chart(document.getElementById("canvas").getContext("2d")).Pie(pieData);
+
+
+      });
+  </script>
+  <a href='/result/<%=@question.survey.id%>'> Back </a>
+  </body>
+</html>

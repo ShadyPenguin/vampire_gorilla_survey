@@ -18,3 +18,14 @@ get '/result/:surveyid' do
   @survey = Survey.find(params[:surveyid])
   erb :result
 end 
+
+
+get '/showgraph/:questionid' do 
+  @question = Question.find(params[:questionid])
+  @strongly_agree = @question.choices[0].responses.count
+  @agree = @question.choices[1].responses.count
+  @neutral = @question.choices[2].responses.count
+  @disagree = @question.choices[3].responses.count
+  @strongly_disagree = @question.choices[4].responses.count
+  erb :chart
+end 

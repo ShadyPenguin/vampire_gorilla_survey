@@ -7,3 +7,40 @@
 th {
   text-align: left;
 }
+
+#strongly_agree {
+margin-top: 30px;
+background-color: #F38630;
+width: 20px;
+height: 20px;
+display: inline-block;
+}
+
+#agree {
+background-color: #E0E4CC;
+width: 20px;
+height: 20px;
+display: inline-block;
+}
+
+#neutral {
+background-color: #69D2E7;
+width: 20px;
+height: 20px;
+display: inline-block;
+}
+
+#disagree {
+background-color: green;
+width: 20px;
+height: 20px;
+display: inline-block;
+}
+
+#strongly_disagree {
+background-color: grey;
+width: 20px;
+height: 20px;
+display: inline-block;
+}
+
