@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
   include BCrypt
+  validates :password, presence: true
+  validates :password, format: {with: /\S{6,}/}
+  validates :email, presence: true
+  validates :email, uniqueness: true
+  validates :email, format: {with: /\S{3,}@\S{3,}\.\S{2,}/}
 
   has_many :surveys
    
