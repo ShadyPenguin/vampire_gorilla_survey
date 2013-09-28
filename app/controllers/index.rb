@@ -47,13 +47,12 @@ end
 
 
 post '/sign_up' do
-  user = User.create(email: params[:email],username: params[:username], password: params[:password])
-  if user.valid?
+  user = User.new(email: params[:email],username: params[:username], password: params[:password])
+  if user.save
     session[:user_id] = user.id
     redirect "/profile/#{user.id}"
-  else
-    redirect "/sign_up"
   end
+  redirect "/sign_up"
 end
 
 post '/create_survey' do
@@ -81,21 +80,3 @@ post "/survey/:id/:counter" do
     end
   redirect "/profile/#{user.id}"
 end
-
-post '/take_survey/:survey_id' do 
-  # take survey
-end 
-
-
-# post '/survey/:survey_id/create_question' do 
-#   @survey = Survey.find(params(:survey_id))
-#   erb :
-# end 
-
-# post '/survey/:survey_id/create_question/:question_id/create_choice' do 
-#   @survey = Survey.find(params[:survey_id])
-#   @question = Question.find(params[:question_id])
-#   erb :
-# end 
-
-
