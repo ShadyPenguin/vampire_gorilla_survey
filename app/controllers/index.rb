@@ -1,11 +1,33 @@
+
+
+
+set :session_fail, '/login'
+
+set :session_secret, 'secret'
+
+set :session_expire, 60*60
+
+
 ############# GET ##############
+
 get '/' do
   # log-in sign up screen
+
+  if session?
+    # user = @authenticated_user
+    redirect "/profile/#{session[:user_id]}"
+  end
   erb :index
 end
 
+get '/login' do
+
+
+  erb :_login
+end
+
 get '/sign_up' do 
-  # sign up pge
+  # sign up page
   erb :sign_up
 end
 
@@ -37,11 +59,17 @@ end
 ############# POST #############
 
 post '/log_in' do 
-  user = User.authenticate(params[:email], params[:password])
-  if user
-    session[:user_id] = user.id
+  
+  authenticated_user = User.authenticate(params[:email], params[:password])
+
+  if authenticated_user
+
+    session_start!
+
+    session[:user_id] = authenticated_user.id
     redirect "/profile/#{user.id}"
-  end 
+  end
+
   redirect '/'
 end 
 
@@ -71,14 +99,14 @@ post "/survey/:id/:counter" do
     name = "q_#{counter}"
     survey.questions << Question.new(title: params["#{name}"])
     counter += 1
-    end
-    survey.questions.each do |q|
-      q.choices << Choice.new(possible_response: "Strongly Agree")
-      q.choices << Choice.new(possible_response: "Agree")
-      q.choices << Choice.new(possible_response: "Neutral")
-      q.choices << Choice.new(possible_response: "Disagree")
-      q.choices << Choice.new(possible_response: "Totally Disagree")
-    end
+  end
+  survey.questions.each do |q|
+    q.choices << Choice.new(possible_response: "Strongly Agree")
+    q.choices << Choice.new(possible_response: "Agree")
+    q.choices << Choice.new(possible_response: "Neutral")
+    q.choices << Choice.new(possible_response: "Disagree")
+    q.choices << Choice.new(possible_response: "Totally Disagree")
+  end
   redirect "/profile/#{user.id}"
 end
 

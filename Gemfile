@@ -17,6 +17,8 @@ gem 'bcrypt-ruby'
 
 gem 'rake'
 
+gem 'sinatra-session'
+
 gem 'shotgun'
 
 group :test do
