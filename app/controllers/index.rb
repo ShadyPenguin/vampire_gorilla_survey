@@ -20,10 +20,12 @@ get '/' do
   erb :index
 end
 
-get '/login' do
+get '/logout' do
 
+session_end!
 
-  erb :_login
+redirect '/'
+
 end
 
 get '/sign_up' do 
@@ -77,6 +79,7 @@ end
 post '/sign_up' do
   user = User.create(email: params[:email],username: params[:username], password: params[:password])
   if user.valid?
+    session_start!
     session[:user_id] = user.id
     redirect "/profile/#{user.id}"
   else
