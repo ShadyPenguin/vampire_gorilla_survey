@@ -10,6 +10,10 @@
 <ul>
 <li><font size="3" color="red"><strong><a href="/create_survey">Create A New Survey</a></strong></font></li>
 <br>
+<li><font size="3" color="red"><strong><a href="/take_survey/<%= @user.surveys.count %>">Take your most recent survey</a><strong></font></li>
+<br>
+<li><font size="3" color="red"><strong><a href="/view_survey/<%= @user.id %>">View all surveys</a><strong></font></li>
+<br>
 <li><font size="3" color="red"><strong><a class="logout" href="/logout">Logout</a><strong></font></li>
 <br>
 </ul>
@@ -22,8 +26,6 @@
   <a href="/result/<%= survey.id %>"><li><%= survey.name %></li></a>
 <% end %>
 </ul>
-
-
 
 
 

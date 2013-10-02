@@ -5,6 +5,12 @@ get '/take_survey/:surveyid' do
   erb :take_survey
 end
 
+get '/view_survey/:user_id' do
+  @user = User.find(params[:user_id])
+  @surveys = Survey.where(user_id: @user.id)
+  erb :view_survey
+end
+
 post '/submit_survey/:surveyid' do 
   puts params[:question]
   choice_hash = params[:question]

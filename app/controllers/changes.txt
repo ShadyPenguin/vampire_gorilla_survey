@@ -130,3 +130,34 @@ end
 # end 
 
 
+#=======
+
+<h1>Welcome, <%= @user.username %>!</h1>
+
+
+<br>
+<br>
+<br>
+
+<div id="menu" style="background-color: #F8F8F8 ;height:300px;width:100%;">
+<div id="menuHeader" style="text-align:center;"><font size="4" color="red"><u><strong>Main Menu</strong></u></font></div><br>
+<ul>
+<li><font size="3" color="red"><strong><a href="/create_survey">Create A New Survey</a></strong></font></li>
+<br>
+<li><font size="3" color="red"><strong><a class="logout" href="/logout">Logout</a><strong></font></li>
+<br>
+</ul>
+
+
+
+<h2>Your Surveys</h2>
+<ul>
+<% @user.surveys.each do |survey| %>
+  <a href="/result/<%= survey.id %>"><li><%= survey.name %></li></a>
+<% end %>
+</ul>
+
+
+
+
+
